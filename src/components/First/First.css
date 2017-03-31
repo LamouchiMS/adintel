@@ -1,0 +1,103 @@
+.first {
+    min-height: calc(100% - 64px);
+    width: 100%;
+    background-color: #424242;
+    /*padding-top: 50px;*/
+}
+
+.topFirst {
+    height: 20%;
+    width: 100%;
+    background-color: #303030;
+}
+
+.topFirst h2 {
+    color: #fafafa;
+    text-transform: uppercase;
+}
+
+.firstPaper {
+    padding: 50px 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    flex-direction: column;
+    background-color: #303030 !important;
+}
+
+.filtersRow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.autoCompleteContainer {
+    width: 75%;
+}
+
+.tabsRow {
+    background-color: #303030 !important;
+    color: #fafafa !important;
+}
+
+.content {
+    display: flex;
+    flex-direction: row;
+    padding: 50px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.card {
+    max-width: 30% !important;
+    height: fit-content;
+    line-height: 20px;
+    margin: 20px;
+}
+
+.cardBody {
+    /*background-color: #212121 !important;*/
+}
+
+.cardHeader {
+    background-color: #212121 !important;
+    text-transform: capitalize !important;
+}
+
+.cardActions {
+    background-color: #212121 !important;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.snackbar {
+    text-align: center !important;
+}
+
+.snackbar span {
+    color: #333 !important;
+    font-weight: bold !important;
+}
+
+.pagination {
+    padding: 50px 0;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.pagination button {
+    margin: 0 25px !important;
+}
+
+.currentPage {
+    color: #fafafa;
+    margin: 0 25px !important;
+}

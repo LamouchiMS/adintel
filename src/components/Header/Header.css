@@ -1,0 +1,12 @@
+.header {
+    background-color: #303030 !important;
+    box-shadow: none !important;
+}
+
+.header h1 {
+    color: #fafafa !important;
+}
+
+.header svg {
+    fill: #fafafa !important;
+}

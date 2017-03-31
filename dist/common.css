@@ -1,0 +1,10 @@
+body, html {
+    background-color: blue;
+    min-height: 100%;
+    width: 100%;
+}
+
+#root {
+    min-height: 100%;
+    width: 100%;
+}

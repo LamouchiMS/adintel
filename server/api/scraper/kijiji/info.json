@@ -1,0 +1,97 @@
+{
+    "kijiji": {
+        "website": "http://www.kijiji.ca",
+        "adTypes": [{
+                "name": "Wanted",
+                "code": "?ad=wanted"
+            },
+            {
+                "name": "Offering",
+                "code": "?ad=offering"
+            }
+        ],
+        "services": [{
+            "name": "Nanny",
+            "code": "c84",
+            "alias_en": "v-childcare-nanny-service",
+            "alias_fr": "v-garderie-gardienne-cpe"
+        }, {
+            "name": "Cleaner",
+            "code": "c160",
+            "alias_en": "v-cleaners-cleaning-service",
+            "alias_fr": "v-entretien-menager"
+        }, {
+            "name": "Education",
+            "code": "c169",
+            "alias_en": "v-tutor-language-lessons",
+            "alias_fr": "v-tuteurs-professeurs-de-langues"
+        }, {
+            "name": "Music teacher",
+            "code": "c86",
+            "alias_en": "v-music-lessons",
+            "alias_fr": "v-cours-de-musique"
+        }, {
+            "name": "Photography",
+            "code": "c168",
+            "alias_en": "v-photography-video",
+            "alias_fr": "v-photographie-video"
+        }],
+        "locations": [{
+                "name": "Alberta",
+                "code": "l9003",
+                "alias": "alberta"
+            },
+            {
+                "name": "British Columbia",
+                "code": "l9007",
+                "alias": "british-columbia"
+            },
+            {
+                "name": "Manitoba",
+                "code": "l9006",
+                "alias": "manitoba"
+            },
+            {
+                "name": "New Brunswick",
+                "code": "l9005",
+                "alias": "new-brunswick"
+            },
+            {
+                "name": "Nova Scotia",
+                "code": "l9002",
+                "alias": "nova-scotia"
+            },
+            {
+                "name": "Ontario",
+                "code": "l9004",
+                "alias": "ontario"
+            },
+            {
+                "name": "Quebec",
+                "code": "l9001",
+                "alias": "quebec"
+            },
+            {
+                "name": "Saskatchewan",
+                "code": "l9009",
+                "alias": "saskatchewan"
+            },
+            {
+                "name": "Newfoundland",
+                "code": "l9008",
+                "alias": "newfoundland"
+            },
+            {
+                "name": "Territories",
+                "code": "l9010",
+                "alias": "territories"
+            },
+            {
+                "name": "Prince Edward Island",
+                "code": "l9011",
+                "alias": "prince-edward-island"
+            }
+
+        ]
+    }
+}

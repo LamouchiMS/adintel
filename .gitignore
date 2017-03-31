@@ -1,0 +1,6 @@
+node_modules/
+.idea
+/npm-debug.log
+**hot-update**
+dist/bundle.js.map
+.env
