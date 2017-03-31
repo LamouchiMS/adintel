@@ -16,6 +16,22 @@
     text-transform: uppercase;
 }
 
+.townsMenu {
+    text-transform: capitalize !important;
+}
+
+.townsMenu span {
+    text-transform: capitalize !important;
+}
+
+.townSelect {
+    text-transform: capitalize !important;
+}
+
+.townSelect input {
+    text-transform: capitalize !important;
+}
+
 .firstPaper {
     padding: 50px 100px;
     display: flex;

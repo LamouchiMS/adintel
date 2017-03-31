@@ -6,7 +6,15 @@ var entrySchema = new mongoose.Schema({
     default: '',
     unique: true
   },
+  town: {
+    type: String,
+    default: ''
+  },
   category: {
+    type: String,
+    default: ''
+  },
+  country: {
     type: String,
     default: ''
   },

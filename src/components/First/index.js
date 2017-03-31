@@ -18,6 +18,7 @@ import NextIcon from 'material-ui/svg-icons/navigation/chevron-right';
 import PreviousIcon from 'material-ui/svg-icons/navigation/chevron-left';
 import FirstIcon from 'material-ui/svg-icons/navigation/first-page';
 import LastIcon from 'material-ui/svg-icons/navigation/last-page';
+import TextField from 'material-ui/TextField';
 
 import styles from './First.css';
 
@@ -40,7 +41,10 @@ class First extends React.Component {
       townValue: 'All',
       count: 0,
       maxPage: 0,
-      currentPage: 0
+      currentPage: 0,
+      regionsList: [],
+      townsList: [],
+      searchString: ''
     };
   }
   componentDidMount() {
@@ -48,31 +52,18 @@ class First extends React.Component {
   }
   fetchData() {
     let phase = 0;
-    fetch('/api/getEntries/' + this.state.projectValue + '/' + this.state.categoryValue + '/' + this.state.contactValue + '/' + this.state.currentPage).then((res) => {
+    let searchString = this.state.searchString;
+    if (searchString.length === 0)
+      searchString = '_';
+    console.info('Fetching data...', '/api/getEntries/' + this.state.projectValue + '/' + this.state.categoryValue + '/' + this.state.contactValue + '/' + this.state.currentPage + '/' + this.state.countryValue + '/' + this.state.regionValue + '/' + this.state.townValue + '/' + searchString + '/');
+    fetch('/api/getEntries/' + this.state.projectValue + '/' + this.state.categoryValue + '/' + this.state.contactValue + '/' + this.state.currentPage + '/' + this.state.countryValue + '/' + this.state.regionValue + '/' + this.state.townValue + '/' + searchString + '/').then((res) => {
       return res.json().then((json) => {
         let result = json.entries;
-        result.forEach((elem) => {
-          let link = elem.url;
-          let count = 0;
-          let startIndex = 0;
-          let endIndex = 0;
-          for (var i = 0; i < link.length; i++) {
-            if (link.charAt(i) === '/') {
-              count++;
-            }
-            if (count === 3) {
-              startIndex = i;
-            } else if (count === 4) {
-              endIndex = i;
-            }
-          }
-          let currentTown = link.substring(startIndex + 2, endIndex + 1);
-          currentTown = currentTown.replace(/-/g, ' ');
-          elem.town = currentTown;
-        });
         console.info(json);
         this.setState({
-          entries: json.entries
+          entries: json.entries,
+          regionsList: json.regionsList,
+          townsList: json.townsList
         }, () => {
           this.setState({
             count: json.count,
@@ -96,14 +87,13 @@ class First extends React.Component {
       });
     });
   }
-  handleUpdateInput = (value) => {
-    this.setState({
-      dataSource: [
-        value, value + value,
-        value + value + value
-      ]
-    });
-  };
+  handleChange(event) {
+    this.setState({searchString: event.target.value});
+  }
+  handleSubmit(event) {
+    event.preventDefault();
+    this.fetchData();
+  }
   handleChangeProject = (event, index, value) => this.setState({
     projectValue: value,
     currentPage: 0
@@ -136,12 +126,18 @@ class First extends React.Component {
   });
   handleChangeCountry = (event, index, value) => this.setState({
     countryValue: value,
+    regionsList: [],
+    townsList: [],
+    regionValue: 'All',
+    townValue: 'All',
     currentPage: 0
   }, () => {
     this.fetchData();
   });
   handleChangeRegion = (event, index, value) => this.setState({
     regionValue: value,
+    townsList: [],
+    townValue: 'All',
     currentPage: 0
   }, () => {
     this.fetchData();
@@ -153,7 +149,8 @@ class First extends React.Component {
     this.fetchData();
   });
   fakeCard(entry, i) {
-    let title = entry.project + ' ' + entry.category;
+    let title = (new Date(parseInt(entry.date))).toString().substring(0, 15);
+    // let title = entry.project + ' ' + entry.category;
     let subtitle = entry.town + ', ' + entry.address;
     if (this.state.contactValue === 'Phone_Only')
       title = entry.phone;
@@ -235,6 +232,20 @@ class First extends React.Component {
       });
     }
   }
+  generateRegions() {
+    return this.state.regionsList.map((region, i) => {
+      return <MenuItem key={i} value={region} primaryText={region}/>
+    });
+  }
+  generateTowns() {
+    return this.state.townsList.map((town, i) => {
+      return <MenuItem className={styles.townsMenu} key={i} value={town} primaryText={town}/>
+    });
+  }
+  handleRequestClose = () => {
+    console.info('Closing snackbar...');
+    this.setState({snackbarOpen: false});
+  };
   render() {
     return (
       <div className={styles.first}>
@@ -242,14 +253,19 @@ class First extends React.Component {
           className={styles.snackbar}
           open={this.state.snackbarOpen}
           message={this.state.snackbarMessage}
+          onRequestClose={this.handleRequestClose}
           autoHideDuration={4000}/>
         <Paper className={styles.firstPaper}>
           <div className={styles.autoCompleteContainer}>
-            <AutoComplete
-              fullWidth
-              hintText="Type anything"
-              dataSource={this.state.dataSource}
-              onUpdateInput={this.handleUpdateInput}/></div>
+            <form onSubmit={this.handleSubmit.bind(this)}>
+              <TextField
+                fullWidth
+                onChange={this.handleChange.bind(this)}
+                id='searchString'
+                floatingLabelText='Type anything'
+                value={this.state.searchString}/>
+            </form>
+          </div>
           <div className={styles.filtersRow}>
             <SelectField
               floatingLabelText="Project"
@@ -311,32 +327,25 @@ class First extends React.Component {
               value={this.state.countryValue}
               onChange={this.handleChangeCountry}>
               <MenuItem value='All' primaryText="All"/>
-              <MenuItem value='CA' primaryText="Canada"/>
-              <MenuItem value='UK' primaryText="United Kingdom"/>
-              <MenuItem value='FR' primaryText="France"/>
-              <MenuItem value='AU' primaryText="Australia"/>
+              <MenuItem value="Canada" primaryText="Canada"/>
+              <MenuItem value="United Kingdom" primaryText="United Kingdom"/>
+              <MenuItem value="France" primaryText="France"/>
+              <MenuItem value="Australia" primaryText="Australia"/>
             </SelectField>
             <SelectField
               floatingLabelText="Region"
               value={this.state.regionValue}
-              onChange={this.handleChangeRegion}>
-              <MenuItem value={1} primaryText="All"/>
-              <MenuItem value={2} primaryText="Alberta"/>
-              <MenuItem value={3} primaryText="British Columbia"/>
-              <MenuItem value={4} primaryText="Manitoba"/>
-              <MenuItem value={5} primaryText="New Brunswick"/>
-              <MenuItem value={6} primaryText="Nova Scotia"/>
-              <MenuItem value={7} primaryText="Ontario"/>
-              <MenuItem value={8} primaryText="Prince Edward Island"/>
-              <MenuItem value={9} primaryText="Quebec"/>
-              <MenuItem value={10} primaryText="Saskatchewan"/>
-              <MenuItem value={11} primaryText="Territories"/>
+              onChange={this.handleChangeRegion}
+              disabled={!this.state.regionsList || this.state.regionsList.length === 0}>
+              {this.generateRegions()}
             </SelectField>
             <SelectField
+              className={styles.townSelect}
               floatingLabelText="Town"
               value={this.state.townValue}
-              onChange={this.handleChangeTown}>
-              <MenuItem value={1} primaryText="All"/>
+              onChange={this.handleChangeTown}
+              disabled={!this.state.townsList || this.state.townsList.length === 0}>
+              {this.generateTowns()}
             </SelectField>
           </div>
         </Paper>
