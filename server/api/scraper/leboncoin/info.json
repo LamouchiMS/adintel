@@ -1,0 +1,17 @@
+{
+    "leboncoin": {
+        "website": "https://www.leboncoin.fr",
+        "adTypes": [{
+            "name": "Wanted",
+            "code": "offres"
+        }],
+        "services": [{
+            "name": "Tickets",
+            "code": "billetterie"
+        }],
+        "locations": [{
+            "name": "France",
+            "code": "ile_de_france"
+        }]
+    }
+}
