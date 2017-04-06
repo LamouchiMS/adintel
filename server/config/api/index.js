@@ -3,4 +3,7 @@ module.exports = function(app) {
 
   // REST API
   require('../../api')(app);
+  app.get('*', function(req, res) {
+    return res.sendFile(path.join(__dirname, '../../../dist/index.html'));
+  });
 }

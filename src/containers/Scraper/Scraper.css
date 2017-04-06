@@ -1,0 +1,43 @@
+.scraper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    min-height: calc(100% - 64px);
+    background-color: #424242;
+}
+
+.paper {
+    padding: 25px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 90%;
+}
+
+.filtersRow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.btnContainer {
+    padding-top: 50px;
+}
+
+.estmContainer {
+    padding-bottom: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    width: 100%;
+}
+
+.estmContainer h2 {
+    padding-top: 20px;
+}

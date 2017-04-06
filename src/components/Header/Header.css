@@ -10,3 +10,7 @@
 .header svg {
     fill: #fafafa !important;
 }
+
+.drawer{
+  letter-spacing: 2px !important;
+}

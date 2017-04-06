@@ -42,7 +42,7 @@ module.exports = {
     // match the output `publicPath`
 
     proxy: {
-      '/api/*': 'http://localhost:3000'
+      '*': 'http://localhost:3000'
     }
     // Proxy API calls to the real server
   },
