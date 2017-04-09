@@ -10,6 +10,8 @@ import Projects from '../../containers/Projects';
 import Scraper from '../../containers/Scraper';
 import Statistics from '../../containers/Statistics';
 import Talks from '../../containers/Talks';
+import CreateProject from '../../components/CreateProject';
+
 const AppContainer = () => (
   <div>
     <Router history={browserHistory} path={'/'}>
@@ -21,6 +23,7 @@ const AppContainer = () => (
         <Route path={'scraper'} component={Scraper}/>
         <Route path={'statistics'} component={Statistics}/>
         <Route path={'talks'} component={Talks}/>
+        <Route path={'createProject'} component={CreateProject}/>
       </Route>
     </Router>
   </div>

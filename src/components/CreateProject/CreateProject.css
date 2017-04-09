@@ -1,0 +1,35 @@
+.createProject {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100% - 64px);
+    background-color: #424242;
+    flex-direction: column;
+}
+
+.createProject p {
+    color: white;
+}
+
+.paper {
+    padding: 25px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 90%;
+    text-align: center;
+}
+
+.paper h2 {
+    padding: 50px 0;
+}
+
+.paper p {
+    max-width: 75%;
+    line-height: 24px;
+}
+
+.btnContainer {
+    padding-top: 50px;
+}
