@@ -1,0 +1,30 @@
+{
+    "gumtreeAu": {
+        "website": "https://www.gumtree.com.au",
+        "adTypes": [{
+                "name": "Wanted",
+                "code": "?ad=wanted"
+            },
+            {
+                "name": "Offering",
+                "code": "?ad=offering"
+            }
+        ],
+        "services": [{
+            "name": "Nanny",
+            "code": "c18465",
+            "alias_en": "s-childcare-nanny"
+        }, {
+            "name": "Cleaner",
+            "code": "c18442",
+            "alias_en": "s-cleaning"
+        }, {
+            "name": "Education",
+            "code": "c21157",
+            "alias_en": "s-learning-tutoring"
+        }, {
+            "name": "Photography",
+            "code": "c18448",
+            "alias_en": "s-photography-video"
+        }]
+    }

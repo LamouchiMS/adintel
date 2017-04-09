@@ -1,6 +1,7 @@
 var request = require('request');
 var leboncoin = require('./server/api/scraper/leboncoin');
 var kijiji = require('./server/api/scraper/kijiji');
+var cheerio = require('cheerio');
 
 function urlToBody(entry) {
   return new Promise(function(resolve, reject) {
@@ -107,3 +108,41 @@ var url =
   'http://www.kijiji.ca/v-tutor-language-lessons/calgary/homework-and-assignment-help/1253605367';
 
 console.log(url.split('/')[4].split('-').join(' '));
+
+function getCustom(url) {
+  return new Promise(function(resolve, reject) {
+    request(url, function(err, res, body) {
+      if (err)
+        return reject(err);
+      else if (res.statusCode !== 200 && res.statusCode !== 302)
+        return reject('Page not found');
+      else {
+        console.log(res);
+        var $ = cheerio.load(body);
+        $('.ad-phone').each(function() {
+          var phone = $(this);
+          // console.log(phone);
+          console.log(phone.toString());
+        });
+      }
+    });
+  });
+}
+
+var options = {
+  url: 'https://ecg-api.gumtree.com.au/api/ads/1144500994',
+  headers: {
+    'Host': 'ecg-api.gumtree.com.au',
+    'Proxy-Connection': 'keep-alive',
+    'Accept': '*/*',
+    'User-Agent': 'Firefox 21.2 (iPhone; iPhone OS 9.3.6; en_AU)',
+    'Accept-Language': 'en-AU',
+    'Authorization': 'Basic YXVfaXBob25lX2FwcDplY2dhcGkhZ2xvYmFs',
+  }
+}
+
+// getCustom(
+//   options
+// ).catch(function(err) {
+//   console.error(err);
+// });
