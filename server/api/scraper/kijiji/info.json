@@ -13,28 +13,28 @@
         "services": [{
             "name": "Nanny",
             "code": "c84",
-            "alias_en": "v-childcare-nanny-service",
-            "alias_fr": "v-garderie-gardienne-cpe"
+            "alias_en": "b-childcare-nanny-service",
+            "alias_fr": "b-garderie-gardienne-cpe"
         }, {
             "name": "Cleaner",
             "code": "c160",
-            "alias_en": "v-cleaners-cleaning-service",
-            "alias_fr": "v-entretien-menager"
+            "alias_en": "b-cleaners-cleaning-service",
+            "alias_fr": "b-entretien-menager"
         }, {
             "name": "Education",
             "code": "c169",
-            "alias_en": "v-tutor-language-lessons",
-            "alias_fr": "v-tuteurs-professeurs-de-langues"
+            "alias_en": "b-tutor-language-lessons",
+            "alias_fr": "b-tuteurs-professeurs-de-langues"
         }, {
             "name": "Music teacher",
             "code": "c86",
-            "alias_en": "v-music-lessons",
-            "alias_fr": "v-cours-de-musique"
+            "alias_en": "b-music-lessons",
+            "alias_fr": "b-cours-de-musique"
         }, {
             "name": "Photography",
             "code": "c168",
-            "alias_en": "v-photography-video",
-            "alias_fr": "v-photographie-video"
+            "alias_en": "b-photography-video",
+            "alias_fr": "b-photographie-video"
         }],
         "locations": [{
                 "name": "Alberta",

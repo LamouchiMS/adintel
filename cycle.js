@@ -1,12 +1,14 @@
 var request = require('request');
 var leboncoin = require('./server/api/scraper/leboncoin');
+var kijiji = require('./server/api/scraper/kijiji');
 
 function urlToBody(entry) {
   return new Promise(function(resolve, reject) {
     request(entry.url, function(err, res, body) {
-      if (err) return reject(err);
-      else if (res.statusCode !== 200 && res.statusCode !== 302)
+      if (err)
         return reject(err);
+      else if (res.statusCode !== 200 && res.statusCode !== 302)
+        return reject('Page not found');
       else {
         entry.htmlBody = body;
         return resolve(entry);
@@ -31,6 +33,8 @@ function fullCycle(page, parser) {
   return new Promise(function(resolve, reject) {
     urlToBody(page).then(parser).then(randomDelay).then(function(res) {
       return resolve(res);
+    }).catch(function(err, x) {
+      console.error(err);
     });
   });
 }
@@ -94,5 +98,12 @@ function recursiveLookup(array, i, fullList, pageParser, entryParser,
   }
 }
 
-recursiveLookup(leboncoin.generateSources(), 0, [], leboncoin.parsePage,
-  leboncoin.parseEntry, true);
+// console.log(kijiji.generateSources());
+
+// recursiveLookup(kijiji.generateSources(), 0, [], kijiji.parsePage,
+//   kijiji.parseEntry, true);
+
+var url =
+  'http://www.kijiji.ca/v-tutor-language-lessons/calgary/homework-and-assignment-help/1253605367';
+
+console.log(url.split('/')[4].split('-').join(' '));

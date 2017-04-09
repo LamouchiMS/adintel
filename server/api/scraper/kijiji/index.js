@@ -5,11 +5,90 @@ var sp = require('./info.json');
 var extractor = require('../../extractor');
 
 module.exports = {
-  scrape: function() {
-    firstRequests();
+  // Generate sources
+  generateSources: function() {
+    var result = [];
+    sp.kijiji.locations.forEach(function(place) {
+      var location = '/' + place.alias;
+      var suffix = place.code
+      var address = place.name;
+      sp.kijiji.adTypes.forEach(function(adType) {
+        var type = adType.code;
+        sp.kijiji.services.forEach(function(service) {
+          var serviceAlias = service.alias_en;
+          if (place.name === 'Quebec') {
+            serviceAlias = service.alias_fr;
+          }
+          // var pagesArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+          var pagesArray = [1];
+          pagesArray.forEach(function(page) {
+            var middle = '/page-' + page;
+            if (page === 1) {
+              middle = '';
+            }
+
+            var path = sp.kijiji.website + '/' +
+              serviceAlias +
+              location + middle + '/' + service.code +
+              suffix +
+              type;
+            var obj = {
+              url: path,
+              address: address,
+              project: service.name,
+              category: adType.name,
+              country: 'Canada',
+              source: 'Kijiji'
+            }
+            result.push(obj);
+          });
+        });
+      });
+    });
+    return result;
   },
-  normalize: function() {
-    normalize();
+  // Parse page
+  parsePage: function(page) {
+    return new Promise(function(resolve, reject) {
+      var $ = cheerio.load(page.htmlBody);
+      var list = [];
+      $('a.title').each(function() {
+        var url = $(this).attr('href');
+        delete page.htmlBody;
+        list.push({
+          url: sp.kijiji.website + url,
+          address: page.address,
+          project: page.project,
+          category: page.category,
+          country: page.country,
+          source: page.source
+        });
+      });
+      return resolve(list);
+    });
+  },
+  // Parse entry
+  parseEntry: function(entry) {
+    return new Promise(function(resolve, reject) {
+      var $ = cheerio.load(entry.htmlBody);
+      var date = $('table.ad-attributes td').html();
+      var text = $('#UserContent').text();
+      var obj = new Entry({
+        url: entry.url,
+        body: text,
+        date: date,
+        address: entry.address,
+        source: 'Kijiji',
+        country: 'Canada',
+        project: entry.project,
+        phone: extractor.getPhone(text),
+        language: extractor.getLanguage(text),
+        email: extractor.getEmail(text),
+        category: entry.category,
+        town: entry.url.split('/')[4].split('-').join(' ')
+      });
+      return resolve(obj);
+    });
   }
 }
 
@@ -57,45 +136,6 @@ function normalize() {
 
 function randomInterval() {
   return Math.floor(Math.random() * (5000 - 2000 + 1) + 2000);
-}
-
-function generateFirstUrls() {
-  var result = [];
-  sp.kijiji.locations.forEach(function(place) {
-    var location = '/' + place.alias;
-    var suffix = place.code
-    var address = place.name;
-    var type = '?ad=wanted';
-    sp.kijiji.adTypes.forEach(function(adType) {
-      var type = adType.code;
-      sp.kijiji.services.forEach(function(service) {
-        var serviceAlias = service.alias_en;
-        if (place.name === 'Quebec') {
-          serviceAlias = service.alias_fr;
-        }
-        var pagesArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-        // var pagesArray = [1, 2];
-        pagesArray.forEach(function(page) {
-          var middle = '/page-' + page;
-          if (page === 1) {
-            middle = '';
-          }
-
-          var path = sp.kijiji.website + '/' + serviceAlias +
-            location + middle + '/' + service.code + suffix +
-            type;
-          var obj = {
-            path: path,
-            address: address,
-            project: service.name,
-            category: adType.name
-          }
-          result.push(obj);
-        });
-      });
-    });
-  });
-  return result;
 }
 
 function checkInterval(index, max, timerID, result, callback) {

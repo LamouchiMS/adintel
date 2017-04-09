@@ -22,7 +22,9 @@ module.exports = {
             var obj = {
               url: path,
               project: service.name,
-              category: adType.name
+              category: adType.name,
+              country: 'France',
+              source: 'LeBonCoin'
             }
             result.push(obj);
           });
@@ -64,7 +66,9 @@ module.exports = {
           town: town,
           region: region,
           project: page.project,
-          category: page.category
+          category: page.category,
+          country: page.country,
+          source: page.source
         });
       });
       return resolve(list);
