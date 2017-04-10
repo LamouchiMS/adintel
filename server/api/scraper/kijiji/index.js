@@ -5,6 +5,8 @@ var sp = require('./info.json');
 var extractor = require('../../extractor');
 
 module.exports = {
+  // Custom headers
+  customHeaders: {},
   // Generate sources
   generateSources: function() {
     var result = [];

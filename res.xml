@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ad:ad
+    xmlns:types="http://www.ebayclassifiedsgroup.com/schema/types/v1"
+    xmlns:cat="http://www.ebayclassifiedsgroup.com/schema/category/v1"
+    xmlns:loc="http://www.ebayclassifiedsgroup.com/schema/location/v1"
+    xmlns:ad="http://www.ebayclassifiedsgroup.com/schema/ad/v1"
+    xmlns:pic="http://www.ebayclassifiedsgroup.com/schema/picture/v1"
+    xmlns:user="http://www.ebayclassifiedsgroup.com/schema/user/v1"
+    xmlns:feat="http://www.ebayclassifiedsgroup.com/schema/feature/v1"
+    xmlns:attr="http://www.ebayclassifiedsgroup.com/schema/attribute/v1"
+    xmlns:vid="http://www.ebayclassifiedsgroup.com/schema/video/v1"
+    xmlns:flag="http://www.ebayclassifiedsgroup.com/schema/flag/v1"
+    xmlns:rate="http://www.ebayclassifiedsgroup.com/schema/rate/v1"
+    xmlns:reply="http://www.ebayclassifiedsgroup.com/schema/reply/v1"
+    xmlns:feed="http://www.ebayclassifiedsgroup.com/schema/feed/v1"
+    xmlns:sug="http://www.ebayclassifiedsgroup.com/schema/suggestion/v1"
+    xmlns:echelon="http://www.ebayclassifiedsgroup.com/schema/echelon/v1"
+    xmlns:stat="http://www.ebayclassifiedsgroup.com/schema/stat/v1"
+    xmlns:notif="http://www.ebayclassifiedsgroup.com/schema/notifications/v1"
+    xmlns:payment="http://www.ebayclassifiedsgroup.com/schema/payment/v1"
+    xmlns:order="http://www.ebayclassifiedsgroup.com/schema/order/v1"
+    xmlns:counter="http://www.ebayclassifiedsgroup.com/schema/counter/v1"
+    locale="en_AU"
+    version="1.50"
+    id="1144500994">
+    <ad:ad-type>
+        <ad:value>OFFERED</ad:value>
+    </ad:ad-type><ad:ad-listing-type/>
+    <ad:poster-type>
+        <ad:value>PRIVATE</ad:value>
+    </ad:poster-type>
+    <ad:title>Need Plagiarism free assignments??</ad:title>
+    <ad:description>Need Plagiarism free assignments? Require good marks in assignments? We know the importance of education and we understand how competitive studies have become. We are a professional team of qualified writers. If you are stuck with any
+        kind of assignment and are stressed how to go about it, we are there to help you out. We have reasonable and affordable rates. We cover a wide range of subjects (be it bachelors or masters) and have specialists working with us. Please dont hesitate
+        to contact us. Best regards and good luck.&#xD; &#xD; Contact num.&#xD; &#xD; Rao 0404659710&#xD; &#xD; raonaveed889@gmail.com&#xD; &#xD; Faizan 0424134931&#xD; &#xD; mfaizankhan89@gmail.com</ad:description><ad:imprint/>
+    <ad:ad-address>
+        <types:full-address>woodvile road</types:full-address>
+        <types:city>Sydney Region</types:city>
+        <types:state>New South Wales</types:state>
+        <types:country>Australia</types:country>
+        <types:longitude>151.00626</types:longitude>
+        <types:latitude>-33.812607</types:latitude>
+    </ad:ad-address><ad:highest-price/>
+    <ad:ad-status>
+        <ad:value>ACTIVE</ad:value>
+    </ad:ad-status>
+    <ad:user-id>6022991505170</ad:user-id>
+    <ad:ad-source-id>10</ad:ad-source-id><ad:ad-external-reference-id/>
+    <ad:phone>0424134931</ad:phone><ad:user-external-reference-id/><ad:external-user-references/>
+    <ad:view-ad-count>10</ad:view-ad-count>
+    <ad:creation-date-time>2017-04-09T12:48:39.000+10:00</ad:creation-date-time>
+    <ad:modification-date-time>2017-04-09T13:04:20.000+10:00</ad:modification-date-time>
+    <ad:start-date-time>2017-04-09T13:04:20.000+10:00</ad:start-date-time>
+    <ad:end-date-time>2017-05-09T13:04:20.000+10:00</ad:end-date-time><feat:features-active/><feat:feature-group-active localized-label="Free" display="false" name="FREE" group="ad_type"/>
+    <cat:category id="18466">
+        <cat:id-name>other_learning_tutoring</cat:id-name>
+        <cat:localized-name>Other Learning &amp; Tutoring</cat:localized-name>
+        <cat:l1-name>services_for_hire</cat:l1-name>
+        <cat:parent-id>21157</cat:parent-id>
+        <cat:children-count>0</cat:children-count>
+    </cat:category>
+    <loc:locations>
+        <loc:location id="3003947">
+            <loc:id-name>Parramatta</loc:id-name>
+            <loc:localized-name>Parramatta</loc:localized-name>
+            <loc:longitude>151.00626</loc:longitude>
+            <loc:latitude>-33.812607</loc:latitude>
+            <loc:regions localized-label="State">
+                <loc:region>
+                    <loc:localized-name>New South Wales</loc:localized-name>
+                </loc:region>
+            </loc:regions>
+            <loc:parent-id>3003927</loc:parent-id>
+        </loc:location>
+    </loc:locations>
+    <attr:attributes>
+        <attr:attribute localized-label="Slogan or tagline or motto" type="STRING" name="other_learning_tutoring.slogan">
+            <attr:value localized-label="we provide quality">we provide quality</attr:value>
+        </attr:attribute><attr:attribute localized-label="Accreditation" type="STRING" name="other_learning_tutoring.accreditation"/><attr:attribute localized-label="ABN" type="STRING" name="other_learning_tutoring.abn"/><attr:attribute localized-label="Website" type="STRING" name="other_learning_tutoring.website"/></attr:attributes><ad:link rel="self" href="http://ecg-api.gumtree.com.au/api/ads/1144500994"/><ad:link rel="similar-items" href="http://ecg-api.gumtree.com.au/api/ads/1144500994/similar-items"/><ad:link rel="self-user" href="http://ecg-api.gumtree.com.au/api/users/6022991505170/ads/1144500994"/><ad:link rel="self-public-website" href="http://www.gumtree.com.au/s-ad/parramatta/other-learning-tutoring/need-plagiarism-free-assignments-/1144500994"/>
+    <pic:pictures>
+        <pic:picture><pic:link rel="thumbnail" href="http://i.ebayimg.com/00/s/OTkzWDEyNDI=/z/l7UAAOSww3tY6aDB/$_14.JPG"/><pic:link rel="normal" href="http://i.ebayimg.com/00/s/OTkzWDEyNDI=/z/l7UAAOSww3tY6aDB/$_74.JPG"/><pic:link rel="large" href="http://i.ebayimg.com/00/s/OTkzWDEyNDI=/z/l7UAAOSww3tY6aDB/$_75.JPG"/><pic:link rel="extraLarge" href="http://i.ebayimg.com/00/s/OTkzWDEyNDI=/z/l7UAAOSww3tY6aDB/$_20.JPG"/><pic:link rel="extraExtraLarge" href="http://i.ebayimg.com/00/s/OTkzWDEyNDI=/z/l7UAAOSww3tY6aDB/$_57.JPG"/></pic:picture>
+    </pic:pictures>
+    <ad:contact-methods><ad:contact-method enabled="true" name="chat"/><ad:contact-method enabled="true" name="phone"/><ad:contact-method enabled="true" name="sms"/></ad:contact-methods>
+    <ad:poster-contact-name>Faizan</ad:poster-contact-name><ad:adSlots/></ad:ad>

@@ -4,6 +4,15 @@ var request = require('request');
 var cheerio = require('cheerio');
 
 module.exports = {
+  // Custom headers
+  customHeaders: {
+    'Host': 'ecg-api.gumtree.com.au',
+    'Proxy-Connection': 'keep-alive',
+    'Accept': '*/*',
+    'User-Agent': 'Firefox 21.2 (iPhone; iPhone OS 9.3.6; en_AU)',
+    'Accept-Language': 'en-AU',
+    'Authorization': 'Basic YXVfaXBob25lX2FwcDplY2dhcGkhZ2xvYmFs',
+  },
   // Generate sources
   generateSources: function() {
     var result = [];

@@ -1,7 +1,12 @@
+var fs = require('fs');
 var request = require('request');
 var leboncoin = require('./server/api/scraper/leboncoin');
 var kijiji = require('./server/api/scraper/kijiji');
+var extractor = require('./server/api/extractor');
 var cheerio = require('cheerio');
+var xml2js = require('xml2js');
+
+var xmlParser = new xml2js.Parser();
 
 function urlToBody(entry) {
   return new Promise(function(resolve, reject) {
@@ -44,33 +49,6 @@ function saveEntry(entry) {
   console.log(entry);
 }
 
-// function pageRecursion(array, i, fullList, pageParser, entryParser) {
-//   if (i < array.length) {
-//     fullCycle(array[i], pageParser).then(function(res) {
-//       console.log('[+]\tPage ' + i + ' OK.\t' + res.length + ' results');
-//       fullList = fullList.concat(res);
-//       pageRecursion(array, ++i, fullList, pageParser, entryParser);
-//     });
-//   } else {
-//     console.log(fullList);
-//     console.log('[*]\tDone!\t' + fullList.length + ' results\n\n');
-//     console.log('[*]\tParsing entries...');
-//     entryRecursion(fullList, 0, entryParser);
-//   }
-// }
-//
-// function entryRecursion(array, i, entryParser) {
-//   if (i < array.length) {
-//     fullCycle(array[i], entryParser).then(function(res) {
-//       console.log('[+]\t' + res.title);
-//       saveEntry(res);
-//       entryRecursion(array, ++i, entryParser);
-//     });
-//   } else {
-//     console.log('[*]\tDone!\t' + array.length + ' saved');
-//   }
-// }
-
 function recursiveLookup(array, i, fullList, pageParser, entryParser,
   isFirstStep) {
   if (isFirstStep) {
@@ -104,31 +82,6 @@ function recursiveLookup(array, i, fullList, pageParser, entryParser,
 // recursiveLookup(kijiji.generateSources(), 0, [], kijiji.parsePage,
 //   kijiji.parseEntry, true);
 
-var url =
-  'http://www.kijiji.ca/v-tutor-language-lessons/calgary/homework-and-assignment-help/1253605367';
-
-console.log(url.split('/')[4].split('-').join(' '));
-
-function getCustom(url) {
-  return new Promise(function(resolve, reject) {
-    request(url, function(err, res, body) {
-      if (err)
-        return reject(err);
-      else if (res.statusCode !== 200 && res.statusCode !== 302)
-        return reject('Page not found');
-      else {
-        console.log(res);
-        var $ = cheerio.load(body);
-        $('.ad-phone').each(function() {
-          var phone = $(this);
-          // console.log(phone);
-          console.log(phone.toString());
-        });
-      }
-    });
-  });
-}
-
 var options = {
   url: 'https://ecg-api.gumtree.com.au/api/ads/1144500994',
   headers: {
@@ -141,8 +94,40 @@ var options = {
   }
 }
 
+function getCustom(url) {
+  return new Promise(function(resolve, reject) {
+    request(url, function(err, res, body) {
+      if (err)
+        return reject(err);
+      else if (res.statusCode !== 200 && res.statusCode !== 302)
+        return reject('Page not found');
+      else {
+        fs.writeFile('res.xml', body, function(err) {
+          if (err) throw err;
+          console.log('Body > res.xml');
+        });
+      }
+    });
+  });
+}
+
 // getCustom(
 //   options
 // ).catch(function(err) {
 //   console.error(err);
 // });
+
+fs.readFile('./res.xml', 'utf8', function(err, data) {
+  if (err) throw err;
+  xmlParser.parseString(data, function(err, result) {
+    var body = result['ad:ad'][
+      'ad:description'
+    ][0];
+    var email = extractor.getEmail(body);
+
+    var phone = extractor.getPhone(body);
+    console.log('[*]\tEmail:\t' + email);
+    console.log('[*]\tPhone:\t' + phone);
+    console.log('Done');
+  });
+});
