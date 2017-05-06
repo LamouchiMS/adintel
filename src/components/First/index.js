@@ -149,7 +149,7 @@ class First extends React.Component {
     this.fetchData();
   });
   fakeCard(entry, i) {
-    let title = (new Date(parseInt(entry.date))).toString().substring(0, 15);
+    let title = entry.date.toString().substring(0, 10);
     // let title = entry.project + ' ' + entry.category;
     let subtitle = entry.town + ', ' + entry.address;
     if (this.state.contactValue === 'Phone_Only')

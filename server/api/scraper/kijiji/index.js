@@ -21,8 +21,8 @@ module.exports = {
           if (place.name === 'Quebec') {
             serviceAlias = service.alias_fr;
           }
-          // var pagesArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-          var pagesArray = [1];
+          var pagesArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+          // var pagesArray = [1];
           pagesArray.forEach(function(page) {
             var middle = '/page-' + page;
             if (page === 1) {
@@ -57,13 +57,19 @@ module.exports = {
       $('a.title').each(function() {
         var url = $(this).attr('href');
         delete page.htmlBody;
+        var current = 1;
+        var expected = parseInt($('span.selected').text());
+        if (page.url.split('/').length > 6) {
+          current = parseInt(page.url.split('/')[5].split('-')[1]);
+        }
         list.push({
           url: sp.kijiji.website + url,
           address: page.address,
           project: page.project,
           category: page.category,
           country: page.country,
-          source: page.source
+          source: page.source,
+          okToGo: current == expected
         });
       });
       return resolve(list);
@@ -78,7 +84,7 @@ module.exports = {
       var obj = new Entry({
         url: entry.url,
         body: text,
-        date: date,
+        date: parseDate(date),
         address: entry.address,
         source: 'Kijiji',
         country: 'Canada',
@@ -94,170 +100,42 @@ module.exports = {
   }
 }
 
-function normalize() {
-  console.log('Normalization started');
-  Entry.find({}, function(err, entries) {
-    if (err) throw err;
-    entries.forEach(function(entry) {
-      var link = entry.url;
-      var count = 0;
-      var startIndex = 0;
-      var endIndex = 0;
-      var bCount = 0;
-      for (var i = 0; i < link.length; i++) {
-        if (link.charAt(i) === '/') {
-          count++;
-        }
-        if (count === 2) {
-          startIndex = i;
-        } else if (count === 3) {
-          endIndex = i;
-        }
-      }
-      var correctProjectAlias = link.substring(startIndex + 2, endIndex +
-        1);
-      // console.log(link);
-      // console.log(correctProjectAlias);
-      var projectIndex = 0;
-      // console.log(correctProjectAlias);
-      for (var j = 0; j < sp.kijiji.services.length; j++) {
-        if (sp.kijiji.services[j].alias_en === correctProjectAlias ||
-          sp.kijiji.services[
-            j].alias_fr === correctProjectAlias) {
-          entry.project = sp.kijiji.services[j].name;
-          entry.save(function(err) {
-            if (err) throw err;
-            console.log('Changed');
-          });
-        }
-      }
-    });
-  });
+function parseDate(date) {
+  var arr = date.split('-');
+  var year = parseInt('20' + arr[2]);
+  var month = parseMonth(arr[1]) - 1;
+  var day = parseInt(arr[0]);
+  return new Date(year, month, day);
 }
 
-
-function randomInterval() {
-  return Math.floor(Math.random() * (5000 - 2000 + 1) + 2000);
-}
-
-function checkInterval(index, max, timerID, result, callback) {
-  if (index === max - 1) {
-    clearInterval(timerID);
-    if (callback) {
-      callback(result);
-    }
-  };
-}
-
-function nextPage(index, max, step) {
-  var result = (Math.floor(index / step) + 1) * step;
-  if (result < max) {
-    return result;
-  } else {
-    return 0;
+function parseMonth(month) {
+  var lowerM = month.toLowerCase();
+  if (lowerM === 'jan' || lowerM === 'janv.')
+    return 1;
+  else if (lowerM === 'feb' || lowerM === 'f&#xe9;vr.')
+    return 2;
+  else if (lowerM === 'mar' || lowerM === 'mars')
+    return 3;
+  else if (lowerM === 'apr')
+    return 4;
+  else if (lowerM === 'may')
+    return 5;
+  else if (lowerM === 'jun')
+    return 6;
+  else if (lowerM === 'jul')
+    return 7
+  else if (lowerM === 'aug')
+    return 8;
+  else if (lowerM === 'sep')
+    return 9;
+  else if (lowerM === 'oct')
+    return 10;
+  else if (lowerM === 'nov')
+    return 11;
+  else if (lowerM === 'dec' || lowerM === 'd&#xe9;c.')
+    return 12;
+  else {
+    console.log(lowerM);
+    return 4;
   }
-}
-
-function firstRequests() {
-  var index = 0;
-  var array = generateFirstUrls();
-  var result = [];
-  var timerID = setInterval(function() {
-    var path = array[index].path;
-    console.log('firstRequests()\t', path);
-    index++;
-    checkInterval(index, array.length, timerID, result, secondRequests);
-    request(path, function(err, res, body) {
-      if (err) {
-        return console.error(err);
-      }
-      if (res.statusCode !== 200 && res.statusCode !== 302) {
-        return console.error('Page not found');
-      }
-      var $ = cheerio.load(body);
-      if ($('a.title').toArray().length === 0) {
-        index = nextPage(index, array.length, 10);
-      } else {
-        $('a.title').each(function() {
-          var url = $(this).attr('href');
-          var obj = {
-            path: sp.kijiji.website + url,
-            address: array[index].address,
-            project: array[index].project,
-            category: array[index].category
-          };
-          result.push(obj);
-          console.log('First links size:\t', result.length);
-        });
-      }
-    });
-  }, randomInterval());
-}
-
-function secondRequests(links) {
-  var index = 0;
-  var array = links;
-  var result = [];
-  var timerID = setInterval(function() {
-    var path = array[index].path;
-    console.log('secondRequests()\t', path);
-    index++;
-    checkInterval(index, array.length, timerID);
-    request(path, function(err, res, body) {
-      if (err) {
-        return console.error(err);
-      }
-      if (res.statusCode !== 200 && res.statusCode !== 302) {
-        return console.error('Page not found');
-      }
-      var $ = cheerio.load(body);
-      var date = $('table.ad-attributes td').html();
-      var text = $('#UserContent').text();
-
-      var obj = new Entry({
-        url: path.toLowerCase(),
-        body: text,
-        date: date,
-        address: array[index].address,
-        source: 'Kijiji',
-        project: array[index].project,
-        phone: extractor.getPhone(text),
-        language: extractor.getLanguage(text),
-        email: extractor.getEmail(text),
-        category: array[index].category
-      });
-      saveEntry(obj);
-    });
-  }, randomInterval());
-}
-
-function saveEntry(entry) {
-  Entry.find({
-    url: entry.url
-  }, function(err, results) {
-    if (err) {
-      return console.error(err);
-    }
-    if (results.length === 0) {
-      Entry.find({
-        body: entry.body
-      }, function(err, secondResults) {
-        if (err) {
-          return console.error(err);
-        }
-        if (secondResults.length === 0) {
-          entry.save(function(err) {
-            if (err) {
-              return console.error(err);
-            }
-            console.log('Entry saved !!!');
-          });
-        } else {
-          console.error('Body duplication');
-        }
-      });
-    } else {
-      console.error('URL duplication');
-    }
-  });
 }

@@ -162,7 +162,7 @@ module.exports = function(app) {
 
           entries = entries.map(function(entry) {
             var short = entry;
-            if (short.body.length > 150) {
+            if (short.body && short.body.length > 150) {
               short.body = entry.body.substring(0, 300) + '...';
             }
             return short;

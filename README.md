@@ -2,11 +2,9 @@
 
 Full Stack Web Scraping app that gathers data from sources such as:
 * Kijiji
-* Gumtree UK
-* Locanto
 * LeBonCoin
 * Gumtree AU
-* Classifiedads
+* Ebay Kleinanzeigen
 
 ## Getting Started
 
@@ -43,6 +41,21 @@ In development mode, the `.bundle.js` is server by Webpack with `hot-reloading`
 cd weather
 npm install
 npm run dev
+```
+
+## Other considered sources
+```
+Gumtree UK
+Gumtree IE
+Gumtree PL
+Gumtree SG
+Locanto
+Classifiedads
+Backpage
+Oodle
+Marktplaats
+Kijiji IT
+Alamaula
 ```
 
 ## Built With

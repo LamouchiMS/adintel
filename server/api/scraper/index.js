@@ -1,8 +1,7 @@
-var kijiji = require('./kijiji');
-var leboncoin = require('./leboncoin');
+var engine = require('./engine');
 
 module.exports = function(app) {
-  // Do stuff
-  // kijiji.scrape();
-  // kijiji.normalize();
+  console.log('Loading engine...');
+  // engine
+  engine.scrape();
 }

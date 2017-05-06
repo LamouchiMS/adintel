@@ -3,57 +3,44 @@ var mongoose = require('mongoose');
 var entrySchema = new mongoose.Schema({
   url: {
     type: String,
-    default: '',
     unique: true
   },
   town: {
-    type: String,
-    default: ''
+    type: String
   },
   category: {
-    type: String,
-    default: ''
+    type: String
   },
   country: {
-    type: String,
-    default: ''
+    type: String
   },
   body: {
-    type: String,
-    default: '',
-    unique: true
+    type: String
   },
   project: {
-    type: String,
-    default: ''
+    type: String
   },
   source: {
-    type: String,
-    default: ''
+    type: String
   },
   date: {
-    type: String,
-    default: ''
+    type: Date
   },
   phase: {
-    type: Number,
-    default: 0
+    type: Number
   },
   address: {
-    type: String,
-    default: ''
+    type: String
   },
   email: {
     type: String,
-    default: ''
+    unique: false
   },
   language: {
-    type: String,
-    default: ''
+    type: String
   },
   phone: {
-    type: String,
-    default: ''
+    type: String
   }
 }, {
   timestamps: true

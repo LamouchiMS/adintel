@@ -1,4 +1,21 @@
 var lngDetector = new(require('languagedetect'));
+// var names = require('./namesFile.json').namesList.slice(0, 1000);
+// var Entry = require('../../models/Entry');
+//
+// Entry.find({}, function(err, data) {
+//   if (err) throw err;
+//   data.forEach(function(entry) {
+//     var body = entry.body.trim();
+//     var words = body.split(' ');
+//     words.forEach(function(word) {
+//       var index = names.indexOf(word.toUpperCase());
+//       if (index > -1) {
+//         console.log(names[index]);
+//       }
+//     });
+//   });
+// });
+
 
 function formatPhoneNumber(number) {
   var clean = number.replace(/\D/g, '');

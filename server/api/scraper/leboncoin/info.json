@@ -1,17 +1,26 @@
 {
-    "leboncoin": {
-        "website": "https://www.leboncoin.fr",
-        "adTypes": [{
-            "name": "Wanted",
-            "code": "offres"
-        }],
-        "services": [{
-            "name": "Tickets",
-            "code": "billetterie"
-        }],
-        "locations": [{
-            "name": "France",
-            "code": "ile_de_france"
-        }]
-    }
+  "leboncoin": {
+    "website": "https://www.leboncoin.fr",
+    "adTypes": [{
+      "name": "Wanted",
+      "code": "demandes"
+    }, {
+      "name": "Offering",
+      "code": "offres"
+    }],
+    "services": [{
+      "name": "Tickets",
+      "code": "billetterie"
+    }, {
+      "name": "Rides",
+      "code": "covoiturage"
+    }, {
+      "name": "Education",
+      "code": "cours_particuliers"
+    }],
+    "locations": [{
+      "name": "France",
+      "code": "ile_de_france"
+    }]
+  }
 }
